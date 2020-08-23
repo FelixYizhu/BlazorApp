@@ -1,10 +1,12 @@
-﻿@page "/student/list"
+﻿@page "/Student/list"
 @using BlazorApp.Models;
+@using BlazorApp.Data;
 @inject HttpClient Http
+@inject Store Store
 
 <h1>Student List</h1>
 <p class="text-right">
-    <a class="btn btn-primary" href="/student/add">Add</a>
+    <a class="btn btn-primary" href="/Student/add">Add</a>
 </p>
 
 <table class="table">
@@ -38,11 +40,11 @@
 
 
 @code {
-    private List<Student> _stutdents;
+    private List<Student> _stutdents => Store.GetStudents();
 
     protected override async Task OnInitializedAsync()
     {
-        var students = await Http.GetFromJsonAsync<List<Student>>("/student");
-        this._stutdents = students;
+        var students = await Http.GetFromJsonAsync<List<Student>>("/Student");
+        Store.SetStudents(students);
     }
 }
