@@ -24,7 +24,7 @@ namespace BlazorWebAssemblyApiSite.Controllers
             return _studentRepository.GetAll();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public Student GetStudentById(int id)
         {
             return _studentRepository.GetStudentById(id);
@@ -37,7 +37,7 @@ namespace BlazorWebAssemblyApiSite.Controllers
             return student;
         }
 
-        [HttpPost]
+        [HttpPut]
         public Student Modify(Student student)
         {
             _studentRepository.Update(student);
