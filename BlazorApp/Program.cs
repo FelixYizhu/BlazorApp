@@ -18,7 +18,7 @@ namespace BlazorApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri("https://localhost:44342") });
+            builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri("https://localhost:6001") });
 
             builder.Services.AddSingleton<Store>();
 
