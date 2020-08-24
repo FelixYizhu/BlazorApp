@@ -26,7 +26,12 @@ namespace BlazorWebAssemblyApiSite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(opt =>
+                {
+                    opt.JsonSerializerOptions.PropertyNamingPolicy = null;
+                }
+                );
 
             //register  IStudentRepository
             services.AddScoped<IStudentRepository, StudentRepository>();
@@ -42,6 +47,13 @@ namespace BlazorWebAssemblyApiSite
 
             app.UseHttpsRedirection();
 
+            //config Cors
+            app.UseCors(config =>
+            {
+                config.AllowAnyOrigin();
+                config.AllowAnyMethod();
+                config.AllowAnyHeader();
+            });
             app.UseRouting();
 
             app.UseAuthorization();
@@ -51,13 +63,6 @@ namespace BlazorWebAssemblyApiSite
                 endpoints.MapControllers();
             });
 
-            //config Cors
-            app.UseCors(config =>
-            {
-                config.AllowAnyOrigin();
-                config.AllowAnyMethod();
-                config.AllowAnyHeader();
-            });
         }
     }
 }
