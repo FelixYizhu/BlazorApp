@@ -8,10 +8,11 @@
 
 
 <h1>Modify Student</h1>
+
+<Edit student="_student" OnSaveCallBack="OnSaveAsync"></Edit>
 <div class="text-danger">
     @_errmsg
 </div>
-<Edit OnSaveCallBack="OnSaveAsync"></Edit>
 
 @code {
     [Parameter]
