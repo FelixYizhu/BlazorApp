@@ -1,8 +1,8 @@
 ﻿@page "/Student/list"
 @using BlazorApp.Models;
 @using BlazorApp.Data;
-@inject HttpClient Http
-@inject Store Store
+@inject HttpClient Http 
+@inject Store Store 
 
 <h1>Student List</h1>
 <p class="text-right">
@@ -18,9 +18,9 @@
         <th>Class</th>
         <th></th>
     </tr>
-    @if (_stutdents != null)
+    @if (_students != null)
     {
-        foreach (var item in _stutdents) 
+        foreach (var item in _students)
         {
             <tr>
                 <td>@item.Id</td>
@@ -40,11 +40,13 @@
 
 
 @code {
-    private List<Student> _stutdents => Store.GetStudents();
+
+    private List<Student> _students =>Store.GetStudents();
 
     protected override async Task OnInitializedAsync()
     {
         var students = await Http.GetFromJsonAsync<List<Student>>("/Student");
         Store.SetStudents(students);
     }
+
 }

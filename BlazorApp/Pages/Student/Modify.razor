@@ -1,0 +1,44 @@
+﻿@page "/Student/Modify/{Id:int}"
+@using BlazorApp.Models
+@using BlazorApp.Data
+@using BlazorApp.Pages.Student.Component
+@inject HttpClient Http
+@inject NavigationManager NavManager
+@inject Store Store 
+
+
+<h1>Modify Student</h1>
+<div class="text-danger">
+    @_errmsg
+</div>
+<Edit OnSaveCallBack="OnSaveAsync"></Edit>
+
+@code {
+    [Parameter]
+    public int Id{ get; set; }
+
+    private Student _student { get; set; }
+    private string _errmsg = "";
+
+    protected override void OnInitialized()
+    {
+        _student = Store.GetStudentById(Id);
+    }
+
+    private async Task OnSaveAsync(Student student)
+    {
+        _student = student;
+        var result = await Http.PutAsJsonAsync("/Student", _student);
+        if (result.IsSuccessStatusCode)
+        {
+
+            NavManager.NavigateTo("/Student/list");
+        }
+        else
+        {
+            _errmsg = "fail to modify";
+        }
+    }
+
+
+}

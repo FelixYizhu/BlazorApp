@@ -1,14 +1,36 @@
 ﻿@page "/Student/add"
+@using BlazorApp.Models
+@inject HttpClient Http
+@inject NavigationManager NavManager
 
-
-
-
-
-
-
-
-
+<h1>Add Student</h1>
+<BlazorApp.Pages.Student.Component.Edit OnSaveCallBack="OnSaveAsync"></BlazorApp.Pages.Student.Component.Edit>
+<div class="text-danger">
+   @_errmsg
+</div>
 
 @code {
 
+    private Student _student { get; set; }
+    private string _errmsg="";
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+    private async Task OnSaveAsync(Student student)
+    {
+        _student = student;
+
+        //add a new student 
+        var result = await Http.PostAsJsonAsync("/Student",_student);
+        if (result.IsSuccessStatusCode)
+        {
+            NavManager.NavigateTo("/Student/List");
+        }
+        else
+        {
+            _errmsg = "fail to save";
+        }
+    }
 }
