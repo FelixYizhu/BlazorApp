@@ -1,1 +1,53 @@
+﻿@using BlazorApp.Models
 
+    <div>
+        <div class="form-group">
+            <label>Id</label>
+            <input @bind="student.Id" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input @bind="student.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Age</label>
+            <input @bind="student.Age" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Class</label>
+            <input @bind="student.Class" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Sex</label>
+            <input @bind="student.Gender" class="form-control" />
+        </div>
+
+        <button class="btn btn-primary" @onclick="TrySave">
+            Save
+        </button>
+
+    </div>
+
+
+@code {
+    [Parameter]
+    public Student student { get; set; }
+
+    [Parameter]
+    public EventCallback<Student> OnSaveCallBack { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        if (student == null)
+        {
+            student = new Student();
+        }
+        return Task.CompletedTask;
+    }
+    private void TrySave()
+    {
+        OnSaveCallBack.InvokeAsync(student);
+    }
+
+
+}
