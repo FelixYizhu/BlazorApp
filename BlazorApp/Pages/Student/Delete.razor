@@ -1,5 +1,47 @@
-﻿<h3>Delete</h3>
+﻿@page "/Student/delete/{id:int}"
+@using BlazorApp.Models
+@using BlazorApp.Data
+
+@inject HttpClient Http
+@inject Store Store
+@inject NavigationManager NavManager
+@inject IJSRuntime JSRuntime
+
+<h1>Delete Student</h1>
+
+<h3>
+    Are you sure to delete（@_student.Id）@_student.Name ？
+</h3>
+
+<buttDele class="btn btn-danger" @onclick="OnDeleteAsync">
+    Delete
+</buttDele>
+
+<button class="btn btn-info" @onclick="OnCancel">Cancle</button>
+
+
+
+
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
+    private Student _student { get; set; }
+    protected override void OnInitialized()
+    {
+        _student = Store.GetStudentById(Id);
+    }
 
+    private async Task OnDeleteAsync()
+    {
+        var result = await Http.DeleteAsync("/student/" + Id);
+        if (result.IsSuccessStatusCode)
+        {
+            NavManager.NavigateTo("/student/list");
+        }
+    }
+    private void OnCancel()
+    {
+        JSRuntime.InvokeVoidAsync("history.back");
+    }
 }
