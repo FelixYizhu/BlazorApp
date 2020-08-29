@@ -14,11 +14,11 @@ namespace BlazorWebAssemblyApiSite.Services
         private static List<Student> Students = new List<Student>()
         {
             new Student{Id=1, Name="Felix", Age=10, Class="Class 1", Gender=Gender.male},
-            new Student{Id=1, Name="Tom", Age=9, Class="Class 1", Gender=Gender.male},
-            new Student{Id=1, Name="Tim", Age=9, Class="Class 2", Gender=Gender.male},
-            new Student{Id=1, Name="Sherry", Age=10, Class="Class 3", Gender=Gender.female},
-            new Student{Id=1, Name="Mary", Age=10, Class="Class 3",Gender=Gender.female},
-            new Student{Id=1, Name="Redas", Age=10, Class="Class 3",Gender=Gender.female}
+            new Student{Id=2, Name="Tom", Age=9, Class="Class 1", Gender=Gender.male},
+            new Student{Id=3, Name="Tim", Age=9, Class="Class 2", Gender=Gender.male},
+            new Student{Id=4, Name="Sherry", Age=10, Class="Class 3", Gender=Gender.female},
+            new Student{Id=5, Name="Mary", Age=10, Class="Class 3",Gender=Gender.female},
+            new Student{Id=6, Name="Redas", Age=10, Class="Class 3",Gender=Gender.female}
         };
 
         public bool Add(Student student)
