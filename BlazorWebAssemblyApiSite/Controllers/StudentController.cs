@@ -8,7 +8,7 @@ using BlazorWebAssemblyApiSite.Services;
 using BlazorWebAssemblyApiSite.Model;
 namespace BlazorWebAssemblyApiSite.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
     {
